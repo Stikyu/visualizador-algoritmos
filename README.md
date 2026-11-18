@@ -10,7 +10,7 @@ estudiantes de programación y para quienes preparan entrevistas técnicas.
 ## Etapas
 
 - [x] **Etapa 1 – Motor y ordenamiento:** reproductor completo, vista de barras y 9 ordenamientos.
-- [ ] Etapa 2 – Búsqueda
+- [x] **Etapa 2 – Búsqueda:** lineal, binaria (iterativa y recursiva) e interpolación.
 - [ ] Etapa 3 – Estructuras de datos
 - [ ] Etapa 4 – Grafos
 - [ ] Etapa 5 – Recursión y programación dinámica
