@@ -25,9 +25,10 @@ export interface PlayerControls {
  * no sabe qué es un paso ni cómo se dibuja. Quien lo usa le pide a la Timeline el estado
  * en `position`. Por eso el mismo hook sirve para ordenamiento, grafos, PD o el modo carrera.
  *
- * `resetKey` cambia cuando se genera una traza nueva → vuelve al principio y se detiene.
+ * `resetKey` cambia cuando se genera una traza nueva → vuelve al principio y se detiene
+ * (o arranca solo si `autoplay`, como al aplicar una operación sobre una estructura).
  */
-export function usePlayer(length: number, resetKey: unknown): PlayerControls {
+export function usePlayer(length: number, resetKey: unknown, autoplay = false): PlayerControls {
   const [position, setPosition] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [speedIndex, setSpeedIndex] = useState(4);
@@ -37,7 +38,7 @@ export function usePlayer(length: number, resetKey: unknown): PlayerControls {
   if (prevKey !== resetKey) {
     setPrevKey(resetKey);
     setPosition(0);
-    setPlaying(false);
+    setPlaying(autoplay && length > 0);
   }
 
   const speed = SPEEDS[speedIndex];

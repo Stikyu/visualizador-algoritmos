@@ -1,0 +1,426 @@
+/* ==========================================================================
+   Estructuras de datos
+   ========================================================================== */
+.ops {
+  gap: 10px;
+}
+.ops__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.struct-empty {
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-sm);
+}
+
+/* Roles (los mismos que en las barras) */
+.cell {
+  --cell-bg: var(--surface-2);
+  --cell-border: var(--line-strong);
+  display: grid;
+  place-items: center;
+  min-width: 52px;
+  height: 40px;
+  padding: 0 8px;
+  border: 2px solid var(--cell-border);
+  border-radius: 8px;
+  background: var(--cell-bg);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+.cell--sm {
+  min-width: 40px;
+  height: 32px;
+}
+.cell--empty {
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--line);
+}
+.cell--tomb {
+  color: var(--ink-3);
+  border-style: dotted;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--surface-2),
+    var(--surface-2) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+.m-current,
+.m-compare {
+  --cell-bg: color-mix(in srgb, var(--c-compare) 35%, var(--surface));
+  --cell-border: var(--c-compare);
+}
+.m-new {
+  --cell-bg: color-mix(in srgb, var(--c-write) 30%, var(--surface));
+  --cell-border: var(--c-write);
+}
+.m-remove,
+.m-swap,
+.m-error {
+  --cell-bg: color-mix(in srgb, var(--c-swap) 30%, var(--surface));
+  --cell-border: var(--c-swap);
+}
+.cell.m-error {
+  border-style: dashed;
+}
+.m-found {
+  --cell-bg: color-mix(in srgb, var(--c-sorted) 35%, var(--surface));
+  --cell-border: var(--c-sorted);
+}
+.m-rotate {
+  --cell-bg: color-mix(in srgb, var(--c-pivot) 35%, var(--surface));
+  --cell-border: var(--c-pivot);
+}
+.m-visited {
+  --cell-bg: color-mix(in srgb, var(--c-sky) 30%, var(--surface));
+  --cell-border: var(--c-sky);
+}
+.m-path {
+  --cell-bg: var(--highlight-soft);
+  --cell-border: var(--highlight);
+}
+.ptr-label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--c-pivot);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Pila */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  padding: 8px 0;
+}
+.stack__row {
+  display: grid;
+  grid-template-columns: 2em 120px 7em;
+  align-items: center;
+  gap: 10px;
+}
+.stack__row .cell {
+  width: 120px;
+}
+.stack__idx {
+  color: var(--ink-3);
+  font-size: 0.78rem;
+  text-align: right;
+}
+
+/* Cola y cadenas */
+.hrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px 0;
+  padding: 24px 8px 30px;
+  min-height: 140px;
+}
+.hrow__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.arrow {
+  color: var(--ink-3);
+  padding: 0 8px;
+  font-size: 1.1rem;
+}
+.ptr-label--below {
+  position: absolute;
+  top: 46px;
+  left: 0;
+}
+
+/* Cola circular */
+.ring {
+  display: block;
+  max-width: 380px;
+  margin: 0 auto;
+}
+.ring__track {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2;
+  stroke-dasharray: 4 6;
+}
+.ring__slot rect {
+  fill: transparent;
+  stroke: var(--line-strong);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+  transition:
+    fill 0.2s,
+    stroke 0.2s;
+}
+.ring__slot.is-full rect {
+  fill: var(--surface-2);
+  stroke-dasharray: none;
+}
+.ring__slot.m-current rect,
+.ring__slot.m-compare rect {
+  fill: color-mix(in srgb, var(--c-compare) 35%, var(--surface));
+  stroke: var(--c-compare);
+}
+.ring__slot.m-new rect {
+  fill: color-mix(in srgb, var(--c-write) 30%, var(--surface));
+  stroke: var(--c-write);
+}
+.ring__slot.m-remove rect {
+  fill: color-mix(in srgb, var(--c-swap) 30%, var(--surface));
+  stroke: var(--c-swap);
+}
+.ring__val {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  fill: var(--ink);
+}
+.ring__idx {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--ink-3);
+}
+.ring__ptr {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--c-pivot);
+}
+.ring__center {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 26px;
+  fill: var(--ink);
+}
+.ring__center-sub {
+  font-size: 11px;
+  fill: var(--ink-3);
+}
+
+/* Lista enlazada */
+.list-wrap,
+.tree-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.llist,
+.tree {
+  display: block;
+}
+.lnode rect {
+  fill: var(--surface-2);
+  stroke: var(--line-strong);
+  stroke-width: 2;
+  transition:
+    fill 0.2s,
+    stroke 0.2s;
+}
+.lnode__sep {
+  stroke: var(--line-strong);
+}
+.lnode__val {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  fill: var(--ink);
+}
+.lnode__dot {
+  fill: var(--ink-2);
+}
+.lnode__null {
+  fill: var(--ink-3);
+  font-size: 14px;
+}
+.lnode__ptr {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--c-pivot);
+}
+.llist__arrow {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.6;
+}
+.llist__arrow--prev {
+  stroke: var(--c-write);
+  stroke-dasharray: 4 3;
+}
+.llist__head {
+  fill: var(--ink-2);
+}
+
+/* Árboles (SVG) */
+.tree__edges line {
+  stroke: var(--line-strong);
+  stroke-width: 2;
+}
+.tnode circle {
+  fill: var(--surface-2);
+  stroke: var(--line-strong);
+  stroke-width: 2;
+  transition:
+    fill 0.2s,
+    stroke 0.2s;
+}
+.tnode__label {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 13px;
+  fill: var(--ink);
+}
+.tnode__badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--ink-2);
+}
+.tnode__badge.is-alert {
+  fill: var(--c-swap);
+  font-weight: 700;
+}
+.tnode__sub {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--ink-3);
+}
+.lnode.m-current rect,
+.lnode.m-compare rect,
+.tnode.m-current circle,
+.tnode.m-compare circle {
+  fill: color-mix(in srgb, var(--c-compare) 40%, var(--surface));
+  stroke: var(--c-compare);
+}
+.lnode.m-new rect,
+.tnode.m-new circle {
+  fill: color-mix(in srgb, var(--c-write) 35%, var(--surface));
+  stroke: var(--c-write);
+}
+.lnode.m-remove rect,
+.lnode.m-error rect,
+.tnode.m-remove circle,
+.tnode.m-swap circle,
+.tnode.m-error circle {
+  fill: color-mix(in srgb, var(--c-swap) 35%, var(--surface));
+  stroke: var(--c-swap);
+}
+.tnode.m-error circle {
+  stroke-dasharray: 5 3;
+}
+.lnode.m-found rect,
+.tnode.m-found circle {
+  fill: color-mix(in srgb, var(--c-sorted) 40%, var(--surface));
+  stroke: var(--c-sorted);
+}
+.lnode.m-rotate rect,
+.tnode.m-rotate circle {
+  fill: color-mix(in srgb, var(--c-pivot) 40%, var(--surface));
+  stroke: var(--c-pivot);
+}
+.lnode.m-visited rect,
+.tnode.m-visited circle {
+  fill: color-mix(in srgb, var(--c-sky) 35%, var(--surface));
+  stroke: var(--c-sky);
+}
+.tnode.m-path circle {
+  stroke: var(--highlight);
+  stroke-width: 3;
+}
+
+/* Heap como arreglo */
+.heap-array {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.aux__cell.m-current,
+.aux__cell.m-compare {
+  background: var(--c-compare);
+  color: #1b1915;
+}
+.aux__cell.m-swap,
+.aux__cell.m-remove {
+  background: var(--c-swap);
+  color: #fff;
+}
+.aux__cell.m-new {
+  background: var(--c-write);
+  color: #fff;
+}
+.aux__cell.m-found {
+  background: var(--c-sorted);
+  color: #fff;
+}
+.aux__cell--wide {
+  min-width: auto;
+  padding: 0 8px;
+}
+
+/* Tablas hash */
+.buckets {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.bucket {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 38px;
+}
+.bucket__idx {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.85rem;
+  flex: none;
+}
+.bucket__idx.m-current {
+  background: var(--c-compare);
+  color: #1b1915;
+}
+.bucket__idx.m-error {
+  background: var(--c-swap);
+  color: #fff;
+}
+.bucket__chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 20px 0;
+  justify-content: center;
+}
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.slot__idx {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}

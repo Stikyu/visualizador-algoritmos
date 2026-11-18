@@ -1,4 +1,4 @@
-import { CATEGORIES, byCategory, findMeta } from '../../algorithms/registry';
+import { CATEGORIES, byCategory, findMeta, opCostsOf } from '../../algorithms/registry';
 import { href } from '../router';
 import { ComplexityChips } from '../Visualizer';
 import { NotFound } from './NotFound';
@@ -11,6 +11,7 @@ export function InfoPage({ id }: { id: string }) {
   const siblings = byCategory(meta.category);
   const hasStable = siblings.some((m) => m.stable !== undefined);
   const hasInPlace = siblings.some((m) => m.inPlace !== undefined);
+  const opCosts = opCostsOf(meta.id);
 
   return (
     <article className="info">
@@ -45,6 +46,22 @@ export function InfoPage({ id }: { id: string }) {
           </ul>
         </section>
       </div>
+
+      {opCosts && (
+        <section className="panel">
+          <h2 className="panel__title">Costo de cada operación</h2>
+          <table className="cmp">
+            <tbody>
+              {opCosts.map((o) => (
+                <tr key={o.op}>
+                  <th scope="row">{o.op}</th>
+                  <td className="mono">{o.cost}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      )}
 
       <section className="panel">
         <h2 className="panel__title">Pseudocódigo</h2>

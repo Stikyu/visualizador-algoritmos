@@ -7,6 +7,7 @@ import '@fontsource/bricolage-grotesque/800.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/600.css';
 import './ui/styles.css';
+import './ui/structures.css';
 import { App } from './ui/App';
 
 createRoot(document.getElementById('root')!).render(
