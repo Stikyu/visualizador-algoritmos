@@ -1,0 +1,1 @@
+import{t as e,y as t}from"./router-C8jCKZVH.js";var n=t();function r({category:t,current:r,items:i}){return(0,n.jsx)(`nav`,{className:`picker`,"aria-label":`Elegir algoritmo`,children:i.map(i=>(0,n.jsx)(`a`,{href:e([t,i.id]),className:i.id===r?`picker__item is-active`:`picker__item`,"aria-current":i.id===r?`page`:void 0,children:i.name},i.id))})}export{r as t};

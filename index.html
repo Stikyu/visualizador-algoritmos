@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Visualizador interactivo de algoritmos y estructuras de datos, en español: ordenamiento, búsqueda, árboles, grafos, recursión y programación dinámica, paso a paso."
+    />
+    <meta name="theme-color" content="#f3efe6" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>traza. · Visualizador de algoritmos</title>
+    <script>
+      // Aplica el tema antes del primer render para evitar el "flash" de color.
+      (function () {
+        try {
+          var t = localStorage.getItem('traza-tema');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
+    <script type="module" crossorigin src="/visualizador-algoritmos/assets/index-Cpsu010q.js"></script>
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/router-C8jCKZVH.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/tree-BMHOrJP1.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/structures-CmROtQFS.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/recursion-7hcEvdYE.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/rng-bzZpz4aF.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/graph-CwPdFU52.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/search-D9CTAGxx.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/steps-DXwRyp8J.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/search-GTrMvauh.js">
+    <link rel="modulepreload" crossorigin href="/visualizador-algoritmos/assets/sorting-1c_xCbqf.js">
+    <link rel="stylesheet" crossorigin href="/visualizador-algoritmos/assets/index-BSuWRNrp.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Esta aplicación necesita JavaScript para funcionar.</noscript>
+  </body>
+</html>
