@@ -1,17 +1,31 @@
-import { useEffect, useState } from 'react';
+import { MotionConfig } from 'motion/react';
+import { Suspense, lazy, useEffect, useState } from 'react';
 import { CATEGORIES } from '../algorithms/registry';
 import { GithubIcon, MenuIcon, MoonIcon, SunIcon } from './icons';
-import { GraphPage } from './pages/GraphPage';
-import { GridPage } from './pages/GridPage';
 import { HomePage } from './pages/HomePage';
-import { InfoPage } from './pages/InfoPage';
 import { NotFound } from './pages/NotFound';
-import { DPPage, RecursionPage } from './pages/ProblemPages';
-import { SearchPage } from './pages/SearchPage';
-import { SortingPage } from './pages/SortingPage';
-import { StructuresPage } from './pages/StructuresPage';
 import { href, useRoute, type Route } from './router';
 import { useTheme } from './theme';
+
+// Cada página se carga recién cuando se visita (code splitting): el inicio no paga el costo
+// de los renderers de grafos, grillas, etc.
+const SortingPage = lazy(() =>
+  import('./pages/SortingPage').then((m) => ({ default: m.SortingPage })),
+);
+const SearchPage = lazy(() =>
+  import('./pages/SearchPage').then((m) => ({ default: m.SearchPage })),
+);
+const StructuresPage = lazy(() =>
+  import('./pages/StructuresPage').then((m) => ({ default: m.StructuresPage })),
+);
+const GraphPage = lazy(() => import('./pages/GraphPage').then((m) => ({ default: m.GraphPage })));
+const GridPage = lazy(() => import('./pages/GridPage').then((m) => ({ default: m.GridPage })));
+const RecursionPage = lazy(() =>
+  import('./pages/ProblemPages').then((m) => ({ default: m.RecursionPage })),
+);
+const DPPage = lazy(() => import('./pages/ProblemPages').then((m) => ({ default: m.DPPage })));
+const RacePage = lazy(() => import('./pages/RacePage').then((m) => ({ default: m.RacePage })));
+const InfoPage = lazy(() => import('./pages/InfoPage').then((m) => ({ default: m.InfoPage })));
 
 export const REPO_URL = 'https://github.com/Stikyu/visualizador-algoritmos';
 
@@ -34,6 +48,8 @@ function renderPage(route: Route) {
       return <RecursionPage route={route} />;
     case 'pd':
       return <DPPage route={route} />;
+    case 'carrera':
+      return <RacePage route={route} />;
     case 'info':
       return <InfoPage id={route.path[1] ?? ''} />;
     default:
@@ -95,6 +111,13 @@ export function App() {
               {c.label}
             </a>
           ))}
+          <a
+            href={href(['carrera'])}
+            className={section === 'carrera' ? 'is-active' : ''}
+            aria-current={section === 'carrera' ? 'page' : undefined}
+          >
+            Carrera
+          </a>
         </nav>
         <div className="topbar__actions">
           <button
@@ -117,7 +140,12 @@ export function App() {
         </div>
       </header>
       <main id="contenido" className="content" tabIndex={-1}>
-        {renderPage(route)}
+        {/* reducedMotion="user": si el sistema pide reducir movimiento, Motion no anima. */}
+        <MotionConfig reducedMotion="user">
+          <Suspense fallback={<p className="muted mono loading">Cargando…</p>}>
+            {renderPage(route)}
+          </Suspense>
+        </MotionConfig>
       </main>
       <footer className="footer">
         <span>
