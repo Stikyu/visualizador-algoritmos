@@ -50,16 +50,18 @@ export function InfoPage({ id }: { id: string }) {
       {opCosts && (
         <section className="panel">
           <h2 className="panel__title">Costo de cada operación</h2>
-          <table className="cmp">
-            <tbody>
-              {opCosts.map((o) => (
-                <tr key={o.op}>
-                  <th scope="row">{o.op}</th>
-                  <td className="mono">{o.cost}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="table-wrap">
+            <table className="cmp">
+              <tbody>
+                {opCosts.map((o) => (
+                  <tr key={o.op}>
+                    <th scope="row">{o.op}</th>
+                    <td className="mono">{o.cost}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       )}
 
