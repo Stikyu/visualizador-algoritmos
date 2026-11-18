@@ -4,6 +4,7 @@ import { GithubIcon, MenuIcon, MoonIcon, SunIcon } from './icons';
 import { HomePage } from './pages/HomePage';
 import { InfoPage } from './pages/InfoPage';
 import { NotFound } from './pages/NotFound';
+import { SearchPage } from './pages/SearchPage';
 import { SortingPage } from './pages/SortingPage';
 import { href, useRoute, type Route } from './router';
 import { useTheme } from './theme';
@@ -17,6 +18,8 @@ function renderPage(route: Route) {
       return <HomePage />;
     case 'ordenamiento':
       return <SortingPage route={route} />;
+    case 'busqueda':
+      return <SearchPage route={route} />;
     case 'info':
       return <InfoPage id={route.path[1] ?? ''} />;
     default:

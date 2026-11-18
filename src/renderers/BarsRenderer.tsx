@@ -153,7 +153,7 @@ export function BarsRenderer({
             <path
               d={`M${offsetX + state.range.lo * W + 2} ${height - 12} v6 H${offsetX + (state.range.hi + 1) * W - 2} v-6`}
             />
-            {state.mid !== null && state.mid >= 0 && (
+            {state.mid !== null && state.mid >= 0 ? (
               <text
                 x={offsetX + state.mid * W + W / 2}
                 y={height - 1}
@@ -162,6 +162,20 @@ export function BarsRenderer({
               >
                 medio
               </text>
+            ) : (
+              <>
+                <text x={offsetX + state.range.lo * W + 2} y={height - 1} fontSize={9}>
+                  lo
+                </text>
+                <text
+                  x={offsetX + (state.range.hi + 1) * W - 2}
+                  y={height - 1}
+                  fontSize={9}
+                  textAnchor="end"
+                >
+                  hi
+                </text>
+              </>
             )}
           </g>
         )}
