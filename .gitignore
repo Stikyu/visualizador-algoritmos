@@ -7,3 +7,4 @@ test-results
 playwright-report
 scripts/dev-shot.mjs
 scripts/dev-hash.mjs
+scripts/dev-axe.mjs
