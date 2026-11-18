@@ -174,3 +174,102 @@
   text-align: center;
   margin: 12px 0 0;
 }
+
+/* Modo carrera */
+.race {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.race__lanes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 12px;
+}
+.race__lane {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s;
+}
+.race__lane.is-done {
+  border-color: var(--c-sorted);
+}
+.race__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.race__head h2 {
+  font-size: 1.1rem;
+}
+.race__badge {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+.race__badge--1 {
+  background: var(--highlight);
+  color: #1b1915;
+}
+.race__progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.race__progress span {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+}
+.race__stats {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  font-size: 0.8rem;
+}
+.race__stats div {
+  display: flex;
+  gap: 6px;
+}
+.race__stats dt {
+  color: var(--ink-3);
+}
+.race__stats dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Modo práctica */
+.practice.is-waiting {
+  border-color: var(--c-compare);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--c-compare) 30%, transparent),
+    var(--shadow);
+}
+.practice__q {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.practice__q p {
+  margin: 0;
+}
+.practice__fb {
+  margin: 8px 0 0;
+  font-weight: 700;
+}
+.practice__fb.is-ok {
+  color: var(--c-sorted-text);
+}
+.practice__fb.is-bad {
+  color: var(--c-swap);
+}
