@@ -13,7 +13,7 @@ estudiantes de programación y para quienes preparan entrevistas técnicas.
 - [x] **Etapa 2 – Búsqueda:** lineal, binaria (iterativa y recursiva) e interpolación.
 - [x] **Etapa 3 – Estructuras de datos:** pila, cola, cola circular, listas simple y doble, ABB, AVL, heap y tablas hash.
 - [x] **Etapa 4 – Grafos:** editor de grafos, BFS, DFS, Dijkstra, Bellman-Ford, Prim, Kruskal, orden topológico, ciclos y laberintos con BFS/Dijkstra/A*.
-- [ ] Etapa 5 – Recursión y programación dinámica
+- [x] **Etapa 5 – Recursión y PD:** árbol de llamadas de Fibonacci (con y sin memo), Hanoi, N reinas, mochila 0/1, LCS, distancia de edición y cambio de monedas.
 - [ ] Etapa 6 – Extras y pulido
 
 ## Cómo correrlo
