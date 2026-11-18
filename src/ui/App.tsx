@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { CATEGORIES } from '../algorithms/registry';
 import { GithubIcon, MenuIcon, MoonIcon, SunIcon } from './icons';
+import { GraphPage } from './pages/GraphPage';
+import { GridPage } from './pages/GridPage';
 import { HomePage } from './pages/HomePage';
 import { InfoPage } from './pages/InfoPage';
 import { NotFound } from './pages/NotFound';
@@ -23,6 +25,10 @@ function renderPage(route: Route) {
       return <SearchPage route={route} />;
     case 'estructuras':
       return <StructuresPage route={route} />;
+    case 'grafos':
+      return <GraphPage route={route} />;
+    case 'grilla':
+      return <GridPage route={route} />;
     case 'info':
       return <InfoPage id={route.path[1] ?? ''} />;
     default:

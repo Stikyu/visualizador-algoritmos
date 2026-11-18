@@ -1,4 +1,6 @@
 import { STRUCTURES } from '../structures';
+import { GRAPH_ALGORITHMS } from './graph';
+import { GRID_ALGORITHMS } from './grid/search';
 import { SEARCH_ALGORITHMS } from './search';
 import { SORTING_ALGORITHMS } from './sorting';
 import type { AlgorithmMeta, Category } from './types';
@@ -25,6 +27,16 @@ export const CATEGORIES: readonly CategoryInfo[] = [
     label: 'Estructuras',
     blurb: 'Pilas, colas, listas, árboles, heaps y tablas hash, operación por operación.',
   },
+  {
+    id: 'grafos',
+    label: 'Grafos',
+    blurb: 'Dibujá tu grafo y miralo recorrer, buscar caminos y armar árboles.',
+  },
+  {
+    id: 'grilla',
+    label: 'Laberintos',
+    blurb: 'BFS, Dijkstra y A* sobre una grilla que podés dibujar.',
+  },
 ];
 
 /** Catálogo de todos los algoritmos (para el inicio, el menú y las páginas de información). */
@@ -32,6 +44,8 @@ export const CATALOG: readonly AlgorithmMeta[] = [
   ...SORTING_ALGORITHMS.map((a) => a.meta),
   ...SEARCH_ALGORITHMS.map((a) => a.meta),
   ...STRUCTURES.map((s) => s.meta),
+  ...GRAPH_ALGORITHMS.map((a) => a.meta),
+  ...GRID_ALGORITHMS.map((a) => a.meta),
 ];
 
 /** Costos por operación (sólo estructuras de datos). */

@@ -117,10 +117,15 @@ export function usePlayer(length: number, resetKey: unknown, autoplay = false): 
   );
 }
 
+const TEXT_INPUTS = new Set(['text', 'number', 'search', 'email', 'password', 'url', 'tel']);
+
+/** ¿El foco está en un campo donde las teclas escriben texto? (checkbox y slider no cuentan). */
 const isTyping = (el: EventTarget | null) =>
   el instanceof HTMLElement &&
-  (el.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName)) &&
-  !(el instanceof HTMLInputElement && el.type === 'range');
+  (el.isContentEditable ||
+    el.tagName === 'TEXTAREA' ||
+    el.tagName === 'SELECT' ||
+    (el instanceof HTMLInputElement && TEXT_INPUTS.has(el.type)));
 
 /** Atajos de teclado: espacio = play/pausa, ←/→ = paso (Shift: ×10), Inicio/Fin. */
 export function usePlayerShortcuts(player: PlayerControls, enabled = true): void {
@@ -134,8 +139,12 @@ export function usePlayerShortcuts(player: PlayerControls, enabled = true): void
       if (onRange && e.key.startsWith('Arrow')) return;
       switch (e.key) {
         case ' ':
-          // No robar el espacio a botones/enlaces enfocados.
-          if (e.target instanceof HTMLButtonElement || e.target instanceof HTMLAnchorElement)
+          // No robar el espacio a botones, enlaces o checkboxes enfocados.
+          if (
+            e.target instanceof HTMLButtonElement ||
+            e.target instanceof HTMLAnchorElement ||
+            (e.target instanceof HTMLInputElement && e.target.type !== 'range')
+          )
             return;
           e.preventDefault();
           player.toggle();

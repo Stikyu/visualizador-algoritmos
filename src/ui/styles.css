@@ -873,8 +873,9 @@ input[type='range'] {
   min-width: 0;
 }
 .aux__name {
-  flex: none;
-  width: 4.5em;
+  flex: 0 0 auto;
+  min-width: 4.5em;
+  max-width: 11em;
   font-size: 0.8rem;
   color: var(--ink-2);
   text-align: right;

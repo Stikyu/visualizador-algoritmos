@@ -1,0 +1,210 @@
+/* ==========================================================================
+   Grafos y grilla
+   ========================================================================== */
+.graph {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 62vh;
+  touch-action: none;
+  user-select: none;
+}
+.graph__bg {
+  fill: transparent;
+}
+.gedge__hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 16;
+  cursor: pointer;
+}
+.gedge__line {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2.5;
+  transition:
+    stroke 0.2s,
+    stroke-width 0.2s,
+    opacity 0.2s;
+}
+.gedge__w {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--ink-2);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.gh--default {
+  fill: var(--line-strong);
+}
+.gh--considered {
+  fill: var(--c-compare);
+}
+.gh--tree {
+  fill: var(--c-sorted);
+}
+.gh--rejected {
+  fill: var(--line);
+}
+.gh--cycle {
+  fill: var(--c-pivot);
+}
+.e-considered .gedge__line {
+  stroke: var(--c-compare);
+  stroke-width: 4;
+  stroke-dasharray: 8 5;
+}
+.e-tree .gedge__line {
+  stroke: var(--c-sorted);
+  stroke-width: 5;
+}
+.e-tree .gedge__w {
+  fill: var(--c-sorted);
+}
+.e-rejected .gedge__line {
+  opacity: 0.35;
+  stroke-dasharray: 3 5;
+}
+.e-cycle .gedge__line {
+  stroke: var(--c-pivot);
+  stroke-width: 5;
+}
+
+.gnode {
+  cursor: pointer;
+}
+.gnode__circle {
+  fill: var(--surface-2);
+  stroke: var(--ink-2);
+  stroke-width: 2.5;
+  transition:
+    fill 0.2s,
+    stroke 0.2s;
+}
+.gnode__label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  fill: var(--ink);
+  pointer-events: none;
+}
+.gnode__start {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-dasharray: 4 4;
+}
+.gnode__mark {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--ink);
+  pointer-events: none;
+}
+.gnode__dist rect {
+  fill: var(--ink);
+}
+.gnode__dist text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--bg);
+}
+.gnode.is-pending .gnode__circle {
+  stroke: var(--c-write);
+  stroke-width: 4;
+  stroke-dasharray: 5 3;
+}
+.n-frontier .gnode__circle {
+  fill: color-mix(in srgb, var(--c-compare) 45%, var(--surface));
+  stroke: var(--c-compare);
+}
+.n-current .gnode__circle {
+  fill: var(--c-swap);
+  stroke: var(--ink);
+}
+.n-current .gnode__label {
+  fill: #fff;
+}
+.n-visited .gnode__circle {
+  fill: color-mix(in srgb, var(--c-sky) 50%, var(--surface));
+  stroke: var(--c-write);
+}
+.n-done .gnode__circle {
+  fill: color-mix(in srgb, var(--c-sorted) 40%, var(--surface));
+  stroke: var(--c-sorted);
+}
+.n-cycle .gnode__circle {
+  fill: color-mix(in srgb, var(--c-pivot) 50%, var(--surface));
+  stroke: var(--c-pivot);
+  stroke-width: 4;
+}
+
+.uf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.uf__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 34px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.uf__node {
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+  background: var(--surface-2);
+  padding: 1px 4px;
+}
+.uf__parent {
+  font-weight: 600;
+  padding: 2px 4px;
+}
+.uf__cell.is-root {
+  border-color: var(--c-sorted);
+}
+.uf__cell.is-root .uf__parent {
+  color: var(--c-sorted);
+}
+
+/* Grilla */
+.grid-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.grid-canvas {
+  display: block;
+  border-radius: 4px;
+  cursor: crosshair;
+}
+.grid-compare {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.grid-compare__item {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.grid-compare__item canvas {
+  cursor: default;
+}
+.grid-compare__item figcaption {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}

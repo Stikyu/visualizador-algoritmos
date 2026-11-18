@@ -8,6 +8,7 @@ import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/600.css';
 import './ui/styles.css';
 import './ui/structures.css';
+import './ui/graphs.css';
 import { App } from './ui/App';
 
 createRoot(document.getElementById('root')!).render(
