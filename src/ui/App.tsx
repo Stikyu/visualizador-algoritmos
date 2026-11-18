@@ -6,6 +6,7 @@ import { GridPage } from './pages/GridPage';
 import { HomePage } from './pages/HomePage';
 import { InfoPage } from './pages/InfoPage';
 import { NotFound } from './pages/NotFound';
+import { DPPage, RecursionPage } from './pages/ProblemPages';
 import { SearchPage } from './pages/SearchPage';
 import { SortingPage } from './pages/SortingPage';
 import { StructuresPage } from './pages/StructuresPage';
@@ -29,6 +30,10 @@ function renderPage(route: Route) {
       return <GraphPage route={route} />;
     case 'grilla':
       return <GridPage route={route} />;
+    case 'recursion':
+      return <RecursionPage route={route} />;
+    case 'pd':
+      return <DPPage route={route} />;
     case 'info':
       return <InfoPage id={route.path[1] ?? ''} />;
     default:

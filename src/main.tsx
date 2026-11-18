@@ -9,6 +9,7 @@ import '@fontsource/jetbrains-mono/600.css';
 import './ui/styles.css';
 import './ui/structures.css';
 import './ui/graphs.css';
+import './ui/problems.css';
 import { App } from './ui/App';
 
 createRoot(document.getElementById('root')!).render(

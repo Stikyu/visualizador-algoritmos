@@ -1,0 +1,176 @@
+/* ==========================================================================
+   Recursión y programación dinámica
+   ========================================================================== */
+
+/* Torres de Hanoi */
+.hanoi {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 16px 0 4px;
+}
+.hanoi__peg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 250px;
+  justify-content: flex-end;
+  border-bottom: 4px solid var(--ink);
+  border-radius: 2px;
+}
+.hanoi__rod {
+  position: absolute;
+  bottom: 0;
+  top: 20px;
+  width: 6px;
+  border-radius: 3px 3px 0 0;
+  background: var(--line-strong);
+}
+.hanoi__stack {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding-bottom: 3px;
+}
+.hanoi__disk {
+  height: 24px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1b1915;
+  background: hsl(var(--hue) 70% 72%);
+  border: 2px solid hsl(var(--hue) 45% 40%);
+}
+.hanoi__disk.is-moving {
+  outline: 3px solid var(--c-compare);
+  outline-offset: 2px;
+}
+.hanoi__name {
+  position: absolute;
+  bottom: -30px;
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+.hanoi__peg.is-target .hanoi__name {
+  color: var(--c-compare);
+}
+.hanoi + * {
+  margin-top: 20px;
+}
+
+/* Tablero de N reinas */
+.board {
+  display: grid;
+  width: min(100%, 440px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.board__cell {
+  display: grid;
+  place-items: center;
+  font-size: clamp(1.1rem, 4vw, 2rem);
+  background: var(--surface);
+  color: var(--ink);
+  transition: background 0.15s;
+}
+.board__cell.is-dark {
+  background: var(--surface-2);
+}
+.board__cell.is-attacked {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    color-mix(in srgb, var(--ink) 9%, transparent) 5px,
+    color-mix(in srgb, var(--ink) 9%, transparent) 7px
+  );
+}
+.board__cell.is-try {
+  background: color-mix(in srgb, var(--c-compare) 55%, var(--surface));
+  font-weight: 700;
+}
+.board__cell.is-conflict {
+  background: color-mix(in srgb, var(--c-swap) 55%, var(--surface));
+  font-weight: 700;
+}
+.board__cell.is-attacker {
+  background: color-mix(in srgb, var(--c-swap) 30%, var(--surface));
+  box-shadow: inset 0 0 0 3px var(--c-swap);
+}
+
+/* Tabla de PD */
+.dp-wrap {
+  overflow-x: auto;
+}
+.dp {
+  border-collapse: separate;
+  border-spacing: 3px;
+  margin: 0 auto;
+  font-size: 0.85rem;
+}
+.dp th {
+  padding: 4px 8px;
+  color: var(--ink-2);
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 4px;
+}
+.dp th.is-active {
+  background: var(--highlight-soft);
+  color: var(--ink);
+}
+.dp tbody th {
+  text-align: right;
+}
+.dp__corner {
+  color: var(--ink-3) !important;
+  font-size: 0.75rem;
+}
+.dp__cell {
+  min-width: 34px;
+  height: 32px;
+  text-align: center;
+  border-radius: 5px;
+  background: var(--surface-2);
+  border: 2px solid transparent;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.dp__cell.is-empty {
+  background: transparent;
+  border: 1px dashed var(--line);
+}
+.dp__cell.is-dep {
+  border-color: var(--c-write);
+  background: color-mix(in srgb, var(--c-write) 18%, var(--surface));
+}
+.dp__cell.is-chosen {
+  border-color: var(--c-sorted);
+  background: color-mix(in srgb, var(--c-sorted) 30%, var(--surface));
+}
+.dp__cell.is-current {
+  background: var(--c-compare);
+  border-color: var(--ink);
+  color: #1b1915;
+  font-weight: 700;
+}
+.dp__cell.is-path {
+  background: var(--c-yellow);
+  color: #1b1915;
+  font-weight: 700;
+}
+.dp__solution {
+  text-align: center;
+  margin: 12px 0 0;
+}

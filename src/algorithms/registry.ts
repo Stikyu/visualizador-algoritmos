@@ -1,5 +1,7 @@
 import { STRUCTURES } from '../structures';
+import { DP_PROBLEMS } from './dp/problems';
 import { GRAPH_ALGORITHMS } from './graph';
+import { RECURSION_PROBLEMS } from './recursion';
 import { GRID_ALGORITHMS } from './grid/search';
 import { SEARCH_ALGORITHMS } from './search';
 import { SORTING_ALGORITHMS } from './sorting';
@@ -37,6 +39,16 @@ export const CATEGORIES: readonly CategoryInfo[] = [
     label: 'Laberintos',
     blurb: 'BFS, Dijkstra y A* sobre una grilla que podés dibujar.',
   },
+  {
+    id: 'recursion',
+    label: 'Recursión',
+    blurb: 'El árbol de llamadas, la pila y el backtracking, a la vista.',
+  },
+  {
+    id: 'pd',
+    label: 'Prog. dinámica',
+    blurb: 'Tablas que se llenan celda por celda, con la recurrencia resaltada.',
+  },
 ];
 
 /** Catálogo de todos los algoritmos (para el inicio, el menú y las páginas de información). */
@@ -46,6 +58,8 @@ export const CATALOG: readonly AlgorithmMeta[] = [
   ...STRUCTURES.map((s) => s.meta),
   ...GRAPH_ALGORITHMS.map((a) => a.meta),
   ...GRID_ALGORITHMS.map((a) => a.meta),
+  ...RECURSION_PROBLEMS.map((p) => p.meta),
+  ...DP_PROBLEMS.map((p) => p.meta),
 ];
 
 /** Costos por operación (sólo estructuras de datos). */
