@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Visualizador interactivo de algoritmos y estructuras de datos, en español: ordenamiento, búsqueda, árboles, grafos, recursión y programación dinámica, paso a paso."
+    />
+    <meta name="theme-color" content="#f3efe6" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>traza. · Visualizador de algoritmos</title>
+    <script>
+      // Aplica el tema antes del primer render para evitar el "flash" de color.
+      (function () {
+        try {
+          var t = localStorage.getItem('traza-tema');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Esta aplicación necesita JavaScript para funcionar.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

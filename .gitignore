@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+*.log
+.DS_Store
+test-results
+playwright-report
+scripts/dev-shot.mjs
+scripts/dev-hash.mjs
