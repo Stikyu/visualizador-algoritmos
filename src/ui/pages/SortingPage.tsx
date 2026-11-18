@@ -15,6 +15,8 @@ import { OptionsBar } from '../OptionsBar';
 import { replaceQuery, type Route } from '../router';
 import { Legend, Visualizer } from '../Visualizer';
 import { ARRAY_LEGEND, arrayCounters, defaultOptions, stabilityLabels } from '../arrayHelpers';
+import { PracticePanel } from '../PracticePanel';
+import { usePractice } from '../usePractice';
 
 export function SortingPage({ route }: { route: Route }) {
   const algo = SORTING_ALGORITHMS.find((a) => a.meta.id === route.path[1]) ?? SORTING_ALGORITHMS[0];
@@ -41,6 +43,7 @@ export function SortingPage({ route }: { route: Route }) {
     [optionState, algo],
   );
   const [showIds, setShowIds] = useState(false);
+  const [practiceOn, setPracticeOn] = useState(false);
 
   const timeline = useMemo(() => {
     const items = toItems(values);
@@ -51,6 +54,7 @@ export function SortingPage({ route }: { route: Route }) {
   const player = usePlayer(timeline.length, timeline);
   const state = timeline.stateAt(player.position);
   const step = timeline.stepAt(player.position);
+  const practice = usePractice(timeline.steps, player, practiceOn);
 
   // La URL siempre refleja algoritmo + datos + opciones → se puede compartir.
   useEffect(() => {
@@ -67,6 +71,7 @@ export function SortingPage({ route }: { route: Route }) {
       prevStep={timeline.stepAt(player.position - 1)}
       initialText={`Estado inicial: ${values.length} elementos. Apretá reproducir (o espacio) para empezar.`}
       counters={arrayCounters(state)}
+      shortcuts={!practice.waiting}
       toolbar={
         <>
           <AlgoPicker
@@ -89,6 +94,14 @@ export function SortingPage({ route }: { route: Route }) {
               />
               Distinguir repetidos (ver estabilidad)
             </label>
+            <label className="check">
+              <input
+                type="checkbox"
+                checked={practiceOn}
+                onChange={(e) => setPracticeOn(e.target.checked)}
+              />
+              Modo práctica (adiviná el próximo paso)
+            </label>
           </div>
         </>
       }
@@ -98,11 +111,14 @@ export function SortingPage({ route }: { route: Route }) {
             state={state}
             duration={Math.min(0.2, 0.8 / player.speed)}
             idLabels={labels}
+            onBarClick={practice.waiting ? practice.pick : undefined}
+            selected={practice.picked}
           />
           <AuxArrays state={state} />
         </>
       }
       legend={<Legend items={ARRAY_LEGEND} />}
+      below={practiceOn ? <PracticePanel practice={practice} /> : undefined}
     />
   );
 }
