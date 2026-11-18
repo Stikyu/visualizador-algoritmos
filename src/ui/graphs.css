@@ -63,7 +63,7 @@
   stroke-width: 5;
 }
 .e-tree .gedge__w {
-  fill: var(--c-sorted);
+  fill: var(--c-sorted-text);
 }
 .e-rejected .gedge__line {
   opacity: 0.35;
@@ -174,7 +174,7 @@
   border-color: var(--c-sorted);
 }
 .uf__cell.is-root .uf__parent {
-  color: var(--c-sorted);
+  color: var(--c-sorted-text);
 }
 
 /* Grilla */

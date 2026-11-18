@@ -20,7 +20,7 @@ export function PseudocodePanel({ lines, active }: { lines: readonly string[]; a
       <h2 id="pseudo-title" className="panel__title">
         Pseudocódigo
       </h2>
-      <ol className="pseudo" ref={ref}>
+      <ol className="pseudo" ref={ref} tabIndex={0} aria-label="Líneas del pseudocódigo">
         {lines.map((line, i) => (
           <li
             key={i}

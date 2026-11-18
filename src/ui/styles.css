@@ -17,7 +17,7 @@
   --surface-2: #ece6d9;
   --ink: #1b1915;
   --ink-2: #5a5448;
-  --ink-3: #7c7567;
+  --ink-3: #6f685b;
   --line: #d9d0be;
   --line-strong: #b9ae97;
   --highlight: #ffe066;
@@ -33,6 +33,8 @@
   --c-pivot: #cc79a7;
   --c-sorted: #009e73;
   --c-found: #009e73;
+  /* Verde para TEXTO sobre fondo claro (el de las barras no llega a 4.5:1). */
+  --c-sorted-text: #00704f;
   --c-sky: #56b4e9;
   --c-yellow: #f0e442;
   --out-opacity: 0.22;
@@ -49,7 +51,7 @@
   --surface-2: #262a32;
   --ink: #ece7dc;
   --ink-2: #b0a999;
-  --ink-3: #8a8476;
+  --ink-3: #9a9486;
   --line: #333843;
   --line-strong: #4a5160;
   --highlight: #ffd84d;
@@ -65,6 +67,7 @@
   --c-pivot: #e59ccb;
   --c-sorted: #2ec49b;
   --c-found: #2ec49b;
+  --c-sorted-text: #2ec49b;
   --out-opacity: 0.2;
   color-scheme: dark;
 }
@@ -627,7 +630,7 @@ input[type='range'] {
 }
 .chip--yes {
   border-color: var(--c-sorted);
-  color: var(--c-sorted);
+  color: var(--c-sorted-text);
 }
 .chip--no {
   border-style: dashed;
@@ -983,7 +986,7 @@ input[type='range'] {
 }
 .explain__done {
   margin: 6px 0 0;
-  color: var(--c-sorted);
+  color: var(--c-sorted-text);
   font-weight: 700;
   font-size: 0.9rem;
 }
@@ -1165,7 +1168,7 @@ input[type='range'] {
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--c-sorted);
+  color: var(--c-sorted-text);
   font-weight: 700;
 }
 .ticks--no li::before {
@@ -1280,4 +1283,47 @@ input[type='range'] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* Franja de modos especiales en el inicio */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  text-decoration: none;
+  border-radius: var(--radius);
+  border: 1px dashed var(--line-strong);
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.feature:hover {
+  border-style: solid;
+  border-color: var(--ink);
+  background: var(--surface);
+}
+.feature b {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+.feature span:last-child {
+  color: var(--ink-2);
+  font-size: 0.9rem;
+}
+.feature__k {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-swap);
+}
+.loading {
+  padding: 40px 0;
 }

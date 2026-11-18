@@ -67,6 +67,34 @@ export function HomePage() {
         </div>
         <HeroBars />
       </section>
+      <section className="features" aria-label="Modos especiales">
+        <a className="feature" href={href(['carrera'])}>
+          <span className="feature__k mono">modo</span>
+          <b>Carrera</b>
+          <span>
+            Hasta cuatro ordenamientos con los mismos datos, lado a lado. ¿Quién gana con datos casi
+            ordenados?
+          </span>
+        </a>
+        <a className="feature" href={href(['ordenamiento', 'seleccion'])}>
+          <span className="feature__k mono">modo</span>
+          <b>Práctica</b>
+          <span>
+            Activalo en cualquier ordenamiento: antes de cada intercambio, adiviná qué barras se
+            mueven.
+          </span>
+        </a>
+        <a className="feature" href={href(['grilla', 'grilla-astar'])}>
+          <span className="feature__k mono">compará</span>
+          <b>BFS vs Dijkstra vs A*</b>
+          <span>Dibujá un laberinto con barro y mirá cuántas celdas explora cada uno.</span>
+        </a>
+        <a className="feature" href={href(['recursion', 'fibonacci'])}>
+          <span className="feature__k mono">entendé</span>
+          <b>Memoización</b>
+          <span>El árbol de llamadas de Fibonacci con y sin memo: de exponencial a lineal.</span>
+        </a>
+      </section>
       {CATEGORIES.map((c) => (
         <CategorySection key={c.id} cat={c} />
       ))}
